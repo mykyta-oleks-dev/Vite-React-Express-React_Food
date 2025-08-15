@@ -1,6 +1,9 @@
+import { useCart } from '../store/cartContext';
+
 const Meal = ({ meal }) => {
+	const { addMeal } = useCart();
 	return (
-		<div className="meal-item" key={meal.id}>
+		<div className="meal-item">
 			<article>
 				<img
 					src={`http://localhost:3000/${meal.image}`}
@@ -10,7 +13,11 @@ const Meal = ({ meal }) => {
 				<span className="meal-item-price">{meal.price}</span>
 				<p className="meal-item-description">{meal.description}</p>
 				<div className="meal-item-actions">
-					<button type="button" className="button">
+					<button
+						type="button"
+						className="button"
+						onClick={() => addMeal(meal)}
+					>
 						Add to Cart
 					</button>
 				</div>
