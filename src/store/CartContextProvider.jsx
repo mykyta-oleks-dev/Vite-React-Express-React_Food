@@ -14,29 +14,26 @@ export const CartContextProvider = ({ children }) => {
 			return;
 		}
 
-		const cartItems = [
-			...items.map((i) => ({ ...i, meal: { ...i.meal } })),
-		];
+		const cartItems = [...items];
 
 		cartItems[candidateIdx].amount++;
 
 		setItems(cartItems);
 	};
 
-	const removeMeal = (meal) => {
-		const candidateIdx = items.findIndex((i) => i.meal.id === meal.id);
+	const removeMeal = (id) => {
+		const candidateIdx = items.findIndex((i) => i.meal.id === id);
 
 		if (candidateIdx === -1) {
 			return;
 		}
 
-		const cartItems = [
-			...items.map((i) => ({ ...i, meal: { ...i.meal } })),
-		];
+		const cartItems = [...items];
 
 		cartItems[candidateIdx].amount--;
 
-		if (cartItems[candidateIdx].amount <= 0) cartItems.splice(candidateIdx, 1)
+		if (cartItems[candidateIdx].amount <= 0)
+			cartItems.splice(candidateIdx, 1);
 
 		setItems(cartItems);
 	};
