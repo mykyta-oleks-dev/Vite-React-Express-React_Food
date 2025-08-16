@@ -18,10 +18,7 @@ export const CartContextProvider = ({ children }) => {
 			...items.map((i) => ({ ...i, meal: { ...i.meal } })),
 		];
 
-		const candidate = { ...items[candidateIdx] };
-		candidate.amount++;
-
-		cartItems[candidateIdx] = candidate;
+		cartItems[candidateIdx].amount++;
 
 		setItems(cartItems);
 	};
@@ -30,22 +27,16 @@ export const CartContextProvider = ({ children }) => {
 		const candidateIdx = items.findIndex((i) => i.meal.id === meal.id);
 
 		if (candidateIdx === -1) {
-			setItems((prev) => [...prev, { meal, amount: 1 }]);
 			return;
 		}
-
-		const candidate = {
-			...items[candidateIdx],
-			meal: { ...items[candidateIdx].meal },
-		};
-		candidate.amount--;
 
 		const cartItems = [
 			...items.map((i) => ({ ...i, meal: { ...i.meal } })),
 		];
 
-		if (candidate.amount > 0) cartItems[candidateIdx] = candidate;
-		else cartItems.splice(candidateIdx, 1);
+		cartItems[candidateIdx].amount--;
+
+		if (cartItems[candidateIdx].amount <= 0) cartItems.splice(candidateIdx, 1)
 
 		setItems(cartItems);
 	};

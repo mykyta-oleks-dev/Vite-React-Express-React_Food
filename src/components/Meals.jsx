@@ -1,5 +1,5 @@
 import useMeals from '../hooks/useMeals';
-import Meal from './Meal';
+import MealItem from './MealItem';
 
 const Meals = () => {
 	const { meals, isLoading, error } = useMeals();
@@ -9,7 +9,7 @@ const Meals = () => {
 	return (
 		<div id="meals">
 			{meals.map((m) => (
-				<Meal key={m.id} meal={m} />
+				<MealItem key={m.id} meal={m} />
 			))}
 		</div>
 	);
