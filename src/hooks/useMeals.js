@@ -25,6 +25,9 @@ const useMeals = () => {
 		meals,
 		isLoading,
 		error,
+		closeError: () => {
+			setError(null);
+		},
 	};
 };
 
