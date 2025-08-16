@@ -24,7 +24,7 @@ const Cart = ({ onClose, onCheckout }) => {
 					items.map((i) => {
 						return (
 							<CartItem
-								key={i.meal.id}
+								key={`cart-${i.meal.id}`}
 								item={i}
 								onAdd={handleAddMeal}
 								onRemove={handleRemoveMeal}

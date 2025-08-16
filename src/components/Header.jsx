@@ -4,27 +4,37 @@ import { useCart } from '../store/cartContext';
 import Modal from './Modal';
 import Cart from './Cart/Cart';
 import Button from './UI/Button';
+import Checkout from './Checkout';
 
 const Header = () => {
 	const { items } = useCart();
 	const [modal, setModal] = useState('');
 
 	const handleClose = () => {
+		console.log('closed');
 		setModal('');
 	};
 
 	const handleGoToCart = () => {
+		console.log('on cart');
 		setModal('cart');
 	};
 
 	const handleGoToCheckout = () => {
+		console.log('on checkout');
 		setModal('checkout');
 	};
 
 	return (
 		<>
-			<Modal open={modal === 'cart'} onClose={handleClose}>
-				<Cart onClose={handleClose} onCheckout={handleGoToCheckout} />
+			<Modal open={!!modal} onClose={handleClose}>
+				{modal === 'cart' && (
+					<Cart
+						onClose={handleClose}
+						onCheckout={handleGoToCheckout}
+					/>
+				)}
+				{modal === 'checkout' && <Checkout onClose={handleClose} />}
 			</Modal>
 
 			<div id="main-header">

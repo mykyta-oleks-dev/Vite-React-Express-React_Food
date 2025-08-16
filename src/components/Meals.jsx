@@ -8,9 +8,9 @@ const Meals = () => {
 
 	return (
 		<div id="meals">
-			{meals.map((m) => (
-				<MealItem key={m.id} meal={m} />
-			))}
+			{meals.length > 0 &&
+				meals.map((m) => <MealItem key={m.id} meal={m} />)}
+			{meals.length === 0 && <p>No meals available to order</p>}
 		</div>
 	);
 };
