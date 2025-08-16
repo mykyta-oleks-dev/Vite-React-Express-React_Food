@@ -5,10 +5,12 @@ import Modal from './Modal';
 import Cart from './Cart/Cart';
 import Button from './UI/Button';
 import Checkout from './Checkout';
+import Error from './Error';
 
 const Header = () => {
 	const { items } = useCart();
 	const [modal, setModal] = useState('');
+	const [error, setError] = useState(null);
 
 	const handleClose = () => {
 		console.log('closed');
@@ -25,6 +27,14 @@ const Header = () => {
 		setModal('checkout');
 	};
 
+	const handleError = (err) => {
+		setError(err);
+	};
+
+	const handleCloseError = () => {
+		setError(null);
+	};
+
 	return (
 		<>
 			<Modal open={!!modal} onClose={handleClose}>
@@ -34,7 +44,11 @@ const Header = () => {
 						onCheckout={handleGoToCheckout}
 					/>
 				)}
-				{modal === 'checkout' && <Checkout onClose={handleClose} />}
+				{modal === 'checkout' && <Checkout onClose={handleClose} onError={handleError} />}
+			</Modal>
+
+			<Modal open={!!error} onClose={handleCloseError} error>
+				{error && <Error error={error} />}
 			</Modal>
 
 			<div id="main-header">

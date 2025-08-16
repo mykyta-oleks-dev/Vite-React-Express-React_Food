@@ -5,7 +5,7 @@ import Button from './UI/Button';
 import Input from './UI/Input';
 import Submit from './UI/Submit';
 
-const Checkout = ({ onClose }) => {
+const Checkout = ({ onClose, onError }) => {
 	const { items } = useCart();
 	const [_state, formAction] = useActionState(checkoutAction, {
 		values: null,
@@ -31,18 +31,26 @@ const Checkout = ({ onClose }) => {
 			city,
 		};
 
-		const res = await fetch('http://localhost:3000/orders', {
-			method: 'post',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				order: {
-					items,
-					customer: values,
+		try {
+			const res = await fetch('http://localhost:3000/orders', {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			}),
-		});
+				body: JSON.stringify({
+					order: {
+						items,
+						customer: values,
+					},
+				}),
+			});
+
+			if (!res.ok) {
+				throw new Error('An error on the server side');
+			}
+		} catch (err) {
+			onError(err);
+		}
 
 		onClose();
 	}
