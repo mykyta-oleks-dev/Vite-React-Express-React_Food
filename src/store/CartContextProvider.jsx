@@ -38,13 +38,18 @@ export const CartContextProvider = ({ children }) => {
 		setItems(cartItems);
 	};
 
+	const resetCart = () => {
+		setItems([]);
+	};
+
 	const contextValue = useMemo(
 		() => ({
 			items,
 			addMeal,
 			removeMeal,
+			resetCart
 		}),
-		[items, addMeal, removeMeal]
+		[items, addMeal, removeMeal, resetCart]
 	);
 
 	return (

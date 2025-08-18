@@ -6,7 +6,7 @@ import Input from './UI/Input';
 import Submit from './UI/Submit';
 
 const Checkout = ({ onClose, onError }) => {
-	const { items } = useCart();
+	const { items, resetCart } = useCart();
 	const [_state, formAction] = useActionState(checkoutAction, {
 		values: null,
 	});
@@ -49,6 +49,7 @@ const Checkout = ({ onClose, onError }) => {
 			if (!res.ok) {
 				throw new Error('An error on the server side');
 			}
+			resetCart();
 		} catch (err) {
 			onError(err);
 		}
