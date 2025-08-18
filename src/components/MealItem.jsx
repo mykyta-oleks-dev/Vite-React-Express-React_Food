@@ -8,7 +8,7 @@ const MealItem = ({ meal }) => {
 		<li className="meal-item">
 			<article>
 				<img
-					src={`http://localhost:3000/${meal.image}`}
+					src={`https://drive.google.com/thumbnail?id=${meal.imageId}`}
 					alt={meal.name}
 				/>
 				<div>

@@ -8,7 +8,9 @@ const useMeals = () => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const res = await fetch('http://localhost:3000/meals');
+				const res = await fetch(
+					import.meta.env.VITE_FIREBASE_URL + '/meals.json'
+				);
 				if (!res.ok) throw new Error('Error fetching meals');
 
 				const data = await res.json();

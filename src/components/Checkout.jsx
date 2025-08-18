@@ -32,18 +32,19 @@ const Checkout = ({ onClose, onError }) => {
 		};
 
 		try {
-			const res = await fetch('http://localhost:3000/orders', {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					order: {
+			const res = await fetch(
+				import.meta.env.VITE_FIREBASE_URL + '/orders.json',
+				{
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
 						items,
 						customer: values,
-					},
-				}),
-			});
+					}),
+				}
+			);
 
 			if (!res.ok) {
 				throw new Error('An error on the server side');

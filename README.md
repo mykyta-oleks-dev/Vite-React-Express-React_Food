@@ -24,7 +24,7 @@ The project uses `npm` as the package manager.
 $ npm install
 ```
 
-Do not forget to install dependancies for the backend app as well by navigating to the `backend` folder and repeating the command above.
+Configure your Firebase project with the Realtime Database so it has the `meals.json` file with the contents of `backend/available-meals.json`. The images are stored in a Google Drive and are accessible by their public ID.
 
 ## Running the project
 
